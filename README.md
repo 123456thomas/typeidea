@@ -1,0 +1,2 @@
+# typeidea
+Django实操
