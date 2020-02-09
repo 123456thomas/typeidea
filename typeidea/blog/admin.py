@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html
+from django.contrib.admin.models import LogEntry
 
 from .adminforms import PostAdminForm
 from typeidea.base_admin import BaseOwnerAdmin
@@ -9,6 +10,12 @@ from typeidea.custom_site import custom_site
 
 
 # Register your models here.
+# 在admin页面查看日志
+@admin.register(LogEntry, site=custom_site)
+class LogEntryAdmin(admin.ModelAdmin):
+    list_display = ('object_repr', 'object_id', 'action_flag', 'user', 'change_message')
+
+
 class PostInline(admin.TabularInline):
     """
     实现分类页面编辑文章
