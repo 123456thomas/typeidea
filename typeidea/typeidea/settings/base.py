@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'typeidea',  # 模版在typeidea下
     'blog',
     'config',
     'comment',
