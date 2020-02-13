@@ -5,6 +5,7 @@
     <title>{% block title %}首页{% endblock %}-TypeIdea博客系统</title>
 </head>
 <body>
+    {% block topcate %}
     <div>
         顶部分类：
         {% for cate in navs %}
@@ -12,16 +13,21 @@
         {% endfor %}
     </div>
     <hr>
+    {% endblock %}
 
     {% block main %}
     {% endblock %}
 
+    {% block bottomcate %}
     <div>
         底部分类：
         {% for cate in categories %}
         <a href="{% url 'category_list' cate.id %}">{{ cate.name }}</a>
         {% endfor %}
     </div>
+    {% endblock %}
+
+    {% block side %}
     <div>
         侧边栏展示：
         {% for sidebar in sidebars %}
@@ -29,5 +35,6 @@
         {{ sidebar.sidebar_content }}
         {% endfor %}
     </div>
+    {% endblock %}
 </body>
 </html>

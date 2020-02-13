@@ -1,7 +1,12 @@
 {% extends "./base.html" %}
 
 {% block title %}
-    {{ post.title }}
+    {% if post %}
+        {{ post.title }}
+    {% endif %}
+{% endblock %}
+
+{% block topcate %}
 {% endblock %}
 
 {% block main %}
@@ -14,4 +19,10 @@
         <hr>
         <p>{{ post.content }}</p>
     {% endif %}
+{% endblock %}
+
+{% block bottomcate %}
+{% endblock %}
+
+{% block side %}
 {% endblock %}
