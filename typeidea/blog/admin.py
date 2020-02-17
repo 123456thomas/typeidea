@@ -39,13 +39,8 @@ class CategoryAdmin(BaseOwnerAdmin):
 
 @admin.register(Tag, site=custom_site)
 class TagAdmin(BaseOwnerAdmin):
-    list_display = ('name', 'status', 'created_time', 'post_count')
+    list_display = ('name', 'status', 'created_time')
     fields = ('name', 'status')
-
-    def post_count(self, obj): # 统计分类下的文章数目
-        return obj.post_set.count()
-
-    post_count.short_description = '文章数量'
 
 
 class CategoryOwnerFilter(admin.SimpleListFilter):

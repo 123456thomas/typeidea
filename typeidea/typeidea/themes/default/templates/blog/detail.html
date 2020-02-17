@@ -1,0 +1,28 @@
+{% extends "./base.html" %}
+
+{% block title %}
+    {% if post %}
+        {{ post.title }}
+    {% endif %}
+{% endblock %}
+
+{% block topcate %}
+{% endblock %}
+
+{% block main %}
+    {% if post %}
+        <h1>{{ post.title }}</h1>
+        <div>
+            <span>作者：{{ post.owner.username }}</span>
+            <span>分类：{{ post.category.name }}</span>
+        </div>
+        <hr>
+        <p>{{ post.content }}</p>
+    {% endif %}
+{% endblock %}
+
+{% block bottomcate %}
+{% endblock %}
+
+{% block side %}
+{% endblock %}
