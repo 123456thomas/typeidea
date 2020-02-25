@@ -13,7 +13,7 @@
     {% if post %}
         <h1>{{ post.title }}</h1>
         <div>
-            <span>作者：{{ post.owner.username }}</span>
+            <span>作者：<a href="{% url 'user' user.id %}">{{ post.owner.username }}</a></span>
             <span>分类：{{ post.category.name }}</span>
         </div>
         <hr>

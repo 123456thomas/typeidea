@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
-from blog.views import (list_post, PostDetailView, IndexView, CategoryView, TagView)
+from blog.views import (SearchView, PostDetailView, IndexView, CategoryView, TagView, AuthorView)
 from config.views import links
 from .custom_site import custom_site
 
@@ -26,6 +26,8 @@ urlpatterns = [
     url(r'^tag/(<?P<tag_id>\d+)/$', TagView.as_view(), name='tag_list'),
     url(r'^post/(?P<post_id>\d+)\.html$', PostDetailView.as_view(), name='post_detail'),
     url(r'^links/$', links, name='links'),
+    url(r'^search/$', SearchView.as_view(), name='search'),
+    url(r'^user/(?P<user_id>\d+)$', AuthorView.as_view(), name='user'),
     url(r'^super_admin/', admin.site.urls, name='super_admin'),
     url(r'^admin/', custom_site.urls, name='admin'),
 ]

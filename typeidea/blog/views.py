@@ -1,3 +1,5 @@
+from django.contrib.auth.models import User
+from django.db.models import Q
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView, ListView
@@ -82,11 +84,26 @@ def list_post(request, category_id=None, tag_id=None):
     return render(request, 'blog/list.html', context=context)
 
 
-def post_detail(request, post_id=None):
-    try:
-        post = Post.objects.get(id=post_id)
-    except Post.DoesNotExist:
-        post = None
-    context = {'post': post, 'sidebars': SideBar.get_all()}
-    context.update(Category.get_navs())
-    return render(request, 'blog/detail.html', context=context)
+class SearchView(IndexView):
+    def get_context_data(self, **kwargs):
+        context = super(SearchView, self).get_context_data(**kwargs)
+        context.update({
+            'keyword': self.request.GET.get('keyword', '')
+        })
+        print('get_context_data: ==>',context)
+        return context
+
+    def get_queryset(self):
+        queryset = super(SearchView, self).get_queryset()
+        keyword = self.request.GET.get('keyword')
+        if not keyword:
+            return queryset
+        print('get_queryset: ==>', keyword)
+        return queryset.filter(Q(title__icontains=keyword) | Q(desc__icontains=keyword))
+
+
+class AuthorView(IndexView):
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        user_id = self.kwargs.get('user_id')
+        return queryset.filter(owner_id=user_id)
